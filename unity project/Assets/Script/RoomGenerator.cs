@@ -10,8 +10,8 @@ public class RoomGenerator : MonoBehaviour
     [Header("房間訊息")]
     public GameObject roomPrefab;
     public int roomNumber;
-    public Color startColor, endColor;
-    private GameObject endRoom;
+    public Color startColor, endColor, preEndColor;
+    private RoomDoor endRoom, preEndRoom;
 
     [Header("位置控制")]
     public Transform generatorPoint;
@@ -20,27 +20,33 @@ public class RoomGenerator : MonoBehaviour
     public LayerMask roomLayer;
     public float detectRad;
 
-    public List<GameObject> rooms = new List<GameObject>();
+    public List<RoomDoor> rooms = new List<RoomDoor>();
 
     void Start()
     {
         for(int i = 0; i < roomNumber; i++)
         {
             //生成房間
-            rooms.Add(Instantiate(roomPrefab, generatorPoint.position, Quaternion.identity));
+            rooms.Add(Instantiate(roomPrefab, generatorPoint.position, Quaternion.identity).GetComponent<RoomDoor>());
             //改變生成點位置
-            ChangePointPos();
+            if(i!=roomNumber-1)ChangePointPos();
         }
         rooms[0].GetComponent<SpriteRenderer>().color = startColor;
-        endRoom = rooms[0];
-        foreach(var room in rooms)
+        preEndRoom = rooms[0];
+        foreach (var room in rooms) SetUpRoom(room, room.transform.position);
+        foreach (var room in rooms)
         {
-            if (room.transform.position.sqrMagnitude > endRoom.transform.position.sqrMagnitude)
+            Debug.Log(preEndRoom.stepToStart);
+            if (room.stepToStart > preEndRoom.stepToStart)
             {
-                endRoom = room;
+                preEndRoom = room;
             }
         }
+        preEndRoom.GetComponent<SpriteRenderer>().color = preEndColor;
+        AddEndRoom();
+        rooms.Add(endRoom);
         endRoom.GetComponent<SpriteRenderer>().color = endColor;
+        foreach (var room in rooms) SetUpRoom(room, room.transform.position);
     }
 
 
@@ -71,5 +77,41 @@ public class RoomGenerator : MonoBehaviour
             }
         } while (Physics2D.OverlapCircle(generatorPoint.position, detectRad, roomLayer));
         
+    }
+    public void SetUpRoom(RoomDoor newRoom, Vector3 roomPosition)
+    {
+        newRoom.roomUp = Physics2D.OverlapCircle(roomPosition + new Vector3(0, yOffset, 0), 0.2f, roomLayer);
+        newRoom.roomDown = Physics2D.OverlapCircle(roomPosition + new Vector3(0, -yOffset, 0), 0.2f, roomLayer);
+        newRoom.roomRight = Physics2D.OverlapCircle(roomPosition + new Vector3(xOffset, 0, 0), 0.2f, roomLayer);
+        newRoom.roomLeft = Physics2D.OverlapCircle(roomPosition + new Vector3(-xOffset, 0, 0), 0.2f, roomLayer);
+        newRoom.UpdateRoom();
+    }
+
+    public void AddEndRoom()
+    {
+        if (!preEndRoom.roomUp)
+        {
+            generatorPoint.position += new Vector3(0, yOffset, 0);
+            endRoom = Instantiate(roomPrefab, generatorPoint.position, Quaternion.identity).GetComponent<RoomDoor>();
+            SetUpRoom(endRoom, endRoom.transform.position);
+        }
+        else if (!preEndRoom.roomDown)
+        {
+            generatorPoint.position += new Vector3(0, -yOffset, 0);
+            endRoom = Instantiate(roomPrefab, generatorPoint.position, Quaternion.identity).GetComponent<RoomDoor>();
+            SetUpRoom(endRoom, endRoom.transform.position);
+        }
+        else if (!preEndRoom.roomLeft)
+        {
+            generatorPoint.position += new Vector3(-xOffset, 0, 0);
+            endRoom = Instantiate(roomPrefab, generatorPoint.position, Quaternion.identity).GetComponent<RoomDoor>();
+            SetUpRoom(endRoom, endRoom.transform.position);
+        }
+        else if (!preEndRoom.roomRight)
+        {
+            generatorPoint.position += new Vector3(xOffset, 0, 0);
+            endRoom = Instantiate(roomPrefab, generatorPoint.position, Quaternion.identity).GetComponent<RoomDoor>();
+            SetUpRoom(endRoom, endRoom.transform.position);
+        }
     }
 }
