@@ -23,7 +23,7 @@ public class RoomDoor : MonoBehaviour
 
     public void UpdateRoom()
     {
-        stepToStart = (int)(Mathf.Abs(transform.position.x / 25) + Mathf.Abs(transform.position.y / 12));
+        stepToStart = (int)(Mathf.Abs(transform.position.x / 16) + Mathf.Abs(transform.position.y / 9));
         text.text = stepToStart.ToString();
         if (roomUp) doorNum++;
         if (roomDown) doorNum++;

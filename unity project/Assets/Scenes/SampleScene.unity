@@ -294,8 +294,8 @@ MonoBehaviour:
   endColor: {r: 1, g: 0, b: 0, a: 1}
   preEndColor: {r: 0.9559822, g: 1, b: 0, a: 1}
   generatorPoint: {fileID: 133548967}
-  xOffset: 25
-  yOffset: 12
+  xOffset: 16
+  yOffset: 9
   roomLayer:
     serializedVersion: 2
     m_Bits: 64
