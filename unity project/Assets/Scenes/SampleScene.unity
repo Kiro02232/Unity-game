@@ -301,6 +301,22 @@ MonoBehaviour:
     m_Bits: 64
   detectRad: 0.2
   rooms: []
+  wallType:
+    singleDown: {fileID: 28100344596537335, guid: d686782413ae84fa5b19264318828f43, type: 3}
+    singleLeft: {fileID: 28100344596537335, guid: 968e3db4397fc4f14ab59d0a0f388e5a, type: 3}
+    singleRight: {fileID: 28100344596537335, guid: b55a6efd423d24c24af2c1c18dfdebeb, type: 3}
+    singleUp: {fileID: 28100344596537335, guid: 47b99d7755c7548b395196d7dd04acb5, type: 3}
+    doubleDL: {fileID: 28100344596537335, guid: 4a50a47c8ed5e4783ac71403a27c1e9b, type: 3}
+    doubleDR: {fileID: 28100344596537335, guid: 91191cb2ac0ba45b0ac9d696ad1dea60, type: 3}
+    doubleDU: {fileID: 28100344596537335, guid: afd3d32f45c83403c9397437dbb3ddf9, type: 3}
+    doubleLR: {fileID: 28100344596537335, guid: 9dea9f438ac1d45db8091411e6197758, type: 3}
+    doubleLU: {fileID: 28100344596537335, guid: 26f5ca051013e4a4aac0b128718600dc, type: 3}
+    doubleRU: {fileID: 28100344596537335, guid: a0a636c784bf141a6b16e7eff857d69b, type: 3}
+    tripleDLR: {fileID: 28100344596537335, guid: 90d7e2bb2aed740128c5d3d679714c24, type: 3}
+    tripleDLU: {fileID: 28100344596537335, guid: f6907c2aad6a74352b1064612b3cbc23, type: 3}
+    tripleDRU: {fileID: 28100344596537335, guid: 35314103899c949bab534cf385ad87a2, type: 3}
+    tripleLRU: {fileID: 28100344596537335, guid: d8a6a41af5d394d48b8b8d2d07aba905, type: 3}
+    fourDoors: {fileID: 28100344596537335, guid: 696cce6a84b1f496a8327fea07734084, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

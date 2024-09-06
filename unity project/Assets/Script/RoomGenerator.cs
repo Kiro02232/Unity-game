@@ -22,6 +22,8 @@ public class RoomGenerator : MonoBehaviour
 
     public List<RoomDoor> rooms = new List<RoomDoor>();
 
+    public WallType wallType;
+
     void Start()
     {
         for(int i = 0; i < roomNumber; i++)
@@ -114,4 +116,13 @@ public class RoomGenerator : MonoBehaviour
             SetUpRoom(endRoom, endRoom.transform.position);
         }
     }
+}
+
+[System.Serializable]
+public class WallType
+{
+    public GameObject singleDown, singleLeft, singleRight, singleUp,
+        doubleDL, doubleDR, doubleDU, doubleLR, doubleLU, doubleRU,
+        tripleDLR, tripleDLU, tripleDRU, tripleLRU, fourDoors;
+
 }
