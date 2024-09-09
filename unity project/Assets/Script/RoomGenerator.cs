@@ -49,6 +49,7 @@ public class RoomGenerator : MonoBehaviour
         rooms.Add(endRoom);
         endRoom.GetComponent<SpriteRenderer>().color = endColor;
         foreach (var room in rooms) SetUpRoom(room, room.transform.position);
+        foreach (var room in rooms) AddDoor(room, room.transform.position);
     }
 
 
