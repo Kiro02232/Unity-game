@@ -89,6 +89,35 @@ public class RoomGenerator : MonoBehaviour
         newRoom.UpdateRoom();
     }
 
+    public void AddDoor(RoomDoor Room, Vector3 roomPos)
+    {
+        switch (Room.doorNum)
+        {
+            case 1:
+                if (Room.roomDown) Instantiate(wallType.singleDown, roomPos, Quaternion.identity);
+                if (Room.roomUp) Instantiate(wallType.singleUp, roomPos, Quaternion.identity);
+                if (Room.roomLeft) Instantiate(wallType.singleLeft, roomPos, Quaternion.identity);
+                if (Room.roomRight) Instantiate(wallType.singleRight, roomPos, Quaternion.identity);
+                break;
+            case 2:
+                if (Room.roomDown&&Room.roomUp) Instantiate(wallType.doubleDU, roomPos, Quaternion.identity);
+                if (Room.roomDown && Room.roomLeft) Instantiate(wallType.doubleDL, roomPos, Quaternion.identity);
+                if (Room.roomDown && Room.roomRight) Instantiate(wallType.doubleDR, roomPos, Quaternion.identity);
+                if (Room.roomLeft && Room.roomUp) Instantiate(wallType.doubleLU, roomPos, Quaternion.identity);
+                if (Room.roomLeft && Room.roomRight) Instantiate(wallType.doubleLR, roomPos, Quaternion.identity);
+                if (Room.roomRight && Room.roomUp) Instantiate(wallType.doubleRU, roomPos, Quaternion.identity);
+                break;
+            case 3:
+                if (!Room.roomDown) Instantiate(wallType.tripleLRU, roomPos, Quaternion.identity);
+                if (!Room.roomUp) Instantiate(wallType.tripleDLR, roomPos, Quaternion.identity);
+                if (!Room.roomLeft) Instantiate(wallType.tripleDRU, roomPos, Quaternion.identity);
+                if (!Room.roomRight) Instantiate(wallType.tripleDLU, roomPos, Quaternion.identity);
+                break;
+
+        }
+                
+    }
+
     public void AddEndRoom()
     {
         if (!preEndRoom.roomUp)
