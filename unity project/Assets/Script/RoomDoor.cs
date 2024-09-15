@@ -10,7 +10,7 @@ public class RoomDoor : MonoBehaviour
     public bool roomLeft, roomRight, roomUp, roomDown;
     public int stepToStart;
     public Text text;
-    public int doorNum;
+    public int doorNum=0;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +23,9 @@ public class RoomDoor : MonoBehaviour
 
     public void UpdateRoom()
     {
-        stepToStart = (int)(Mathf.Abs(transform.position.x / 16) + Mathf.Abs(transform.position.y / 9));
+        stepToStart = (int)(Mathf.Abs(transform.position.x / 18) + Mathf.Abs(transform.position.y / 10));
         text.text = stepToStart.ToString();
+        doorNum = 0;
         if (roomUp) doorNum++;
         if (roomDown) doorNum++;
         if (roomLeft) doorNum++;

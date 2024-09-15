@@ -49,7 +49,11 @@ public class RoomGenerator : MonoBehaviour
         rooms.Add(endRoom);
         endRoom.GetComponent<SpriteRenderer>().color = endColor;
         foreach (var room in rooms) SetUpRoom(room, room.transform.position);
-        foreach (var room in rooms) AddDoor(room, room.transform.position);
+        foreach (var room in rooms)
+        {
+            Debug.Log(room.doorNum);
+            AddDoor(room, room.transform.position);
+        }
     }
 
 
@@ -114,6 +118,9 @@ public class RoomGenerator : MonoBehaviour
                 if (!Room.roomLeft) Instantiate(wallType.tripleDRU, roomPos, Quaternion.identity);
                 if (!Room.roomRight) Instantiate(wallType.tripleDLU, roomPos, Quaternion.identity);
                 break;
+            case 4:
+                Instantiate(wallType.fourDoors, roomPos, Quaternion.identity);
+                break;
 
         }
                 
@@ -121,6 +128,8 @@ public class RoomGenerator : MonoBehaviour
 
     public void AddEndRoom()
     {
+        generatorPoint.position = preEndRoom.transform.position;
+
         if (!preEndRoom.roomUp)
         {
             generatorPoint.position += new Vector3(0, yOffset, 0);
