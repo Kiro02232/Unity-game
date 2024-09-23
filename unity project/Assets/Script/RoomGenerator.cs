@@ -91,7 +91,7 @@ public class RoomGenerator : MonoBehaviour
         newRoom.roomDown = Physics2D.OverlapCircle(roomPosition + new Vector3(0, -yOffset, 0), 0.2f, roomLayer);
         newRoom.roomRight = Physics2D.OverlapCircle(roomPosition + new Vector3(xOffset, 0, 0), 0.2f, roomLayer);
         newRoom.roomLeft = Physics2D.OverlapCircle(roomPosition + new Vector3(-xOffset, 0, 0), 0.2f, roomLayer);
-        newRoom.UpdateRoom();
+        newRoom.UpdateRoom(xOffset, yOffset);
     }
 
     public void AddDoor(RoomDoor Room, Vector3 roomPos)
