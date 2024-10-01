@@ -31,4 +31,11 @@ public class RoomDoor : MonoBehaviour
         if (roomLeft) doorNum++;
         if (roomRight) doorNum++;
     }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            CameraController.instance.ChangeTarget(transform);
+        }
+    }
 }
