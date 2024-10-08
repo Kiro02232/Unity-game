@@ -6,6 +6,8 @@ public class RoomGenerator : MonoBehaviour
 {
     public enum Direction {up, down, right, left};
     public Direction direction;
+    [Header("房間內部")]
+    public GameObject monsterRoom;
 
     [Header("房間訊息")]
     public GameObject roomPrefab;
@@ -154,6 +156,8 @@ public class RoomGenerator : MonoBehaviour
             endRoom = Instantiate(roomPrefab, generatorPoint.position, Quaternion.identity).GetComponent<RoomDoor>();
             SetUpRoom(endRoom, endRoom.transform.position);
         }
+
+        Instantiate(monsterRoom, generatorPoint.position, Quaternion.identity);
     }
 }
 
