@@ -303,8 +303,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   direction: 0
+  monsterRoom: {fileID: 4043440228584363378, guid: f905186cb051a47afaee815420e8232d, type: 3}
   roomPrefab: {fileID: 6153812278525999324, guid: c0de2d59d216e4a3c8484589b52b32d7, type: 3}
-  roomNumber: 10
+  roomNumber: 20
   startColor: {r: 0.2003901, g: 1, b: 0, a: 1}
   endColor: {r: 1, g: 0, b: 0, a: 1}
   preEndColor: {r: 0.9559822, g: 1, b: 0, a: 1}
