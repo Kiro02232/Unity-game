@@ -36,6 +36,15 @@ public class RoomDoor : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             CameraController.instance.ChangeTarget(transform);
+            other.GetComponent<PlayerControler>().playerRoomDistance = stepToStart;
+            other.GetComponent<PlayerControler>().playerRoomX = transform.position.x;
+            other.GetComponent<PlayerControler>().playerRoomY = transform.position.y;
+        }
+        if (other.CompareTag("Enemy")){
+            other.GetComponent<MonsterAI>().monsterRoomDistance = stepToStart;
+
+            other.GetComponent<MonsterAI>().monsterRoomX = transform.position.x;
+            other.GetComponent<MonsterAI>().monsterRoomY = transform.position.y;
         }
     }
 }

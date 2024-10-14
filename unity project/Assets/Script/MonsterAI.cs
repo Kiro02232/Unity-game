@@ -9,6 +9,9 @@ public class MonsterAI : MonoBehaviour
     public GameObject player;
     public GameObject roomGenerator;
     public List<RoomDoor> rooms;
+    public int monsterRoomDistance;
+    public float monsterRoomX;
+    public float monsterRoomY;
 
     public int movingStrategy = 0;// 0=sleep, 1=scout, 2=chase
 
@@ -21,10 +24,32 @@ public class MonsterAI : MonoBehaviour
         player = GameObject.Find("Player");
     }
 
-
+    
     void Update()
     {
-        
+        Move();
+    }
+
+    void ChangeMode()
+    {
+        if(movingStrategy == 0)
+        {
+
+        }
+        else if (movingStrategy == 1)
+        {
+            if(Mathf.Abs(monsterRoomDistance - player.GetComponent<PlayerControler>().playerRoomDistance) <= 1)
+            {
+                movingStrategy = 2;
+            }
+        }
+        else if (movingStrategy == 2)
+        {
+            if(Mathf.Abs(monsterRoomDistance - player.GetComponent<PlayerControler>().playerRoomDistance) >=2)
+            {
+                movingStrategy = 1;
+            }
+        }
     }
 
     void Move()
