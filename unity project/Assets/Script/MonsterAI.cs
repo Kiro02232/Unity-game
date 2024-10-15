@@ -56,7 +56,8 @@ public class MonsterAI : MonoBehaviour
     {
         if(movingStrategy == 1)
         {
-
+            RoomDoor targetRoom;
+            targetRoom = rooms[Random.Range(0, roomGenerator.GetComponent<RoomGenerator>().roomNumber)];
         }
         else if(movingStrategy == 2)
         {
