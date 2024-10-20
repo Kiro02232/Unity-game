@@ -11,6 +11,7 @@ public class RoomDoor : MonoBehaviour
     public int stepToStart;
     public Text text;
     public int doorNum=0;
+    public int roomPosX, roomPosY;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +25,8 @@ public class RoomDoor : MonoBehaviour
     public void UpdateRoom(float xOffset, float yOffset)
     {
         stepToStart = (int)(Mathf.Abs(transform.position.x / xOffset) + Mathf.Abs(transform.position.y / yOffset));
+        roomPosX = (int)(transform.position.x / xOffset);
+        roomPosY = (int)(transform.position.y / yOffset);
         text.text = stepToStart.ToString();
         doorNum = 0;
         if (roomUp) doorNum++;
@@ -36,15 +39,12 @@ public class RoomDoor : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             CameraController.instance.ChangeTarget(transform);
-            other.GetComponent<PlayerControler>().playerRoomDistance = stepToStart;
-            other.GetComponent<PlayerControler>().playerRoomX = transform.position.x;
-            other.GetComponent<PlayerControler>().playerRoomY = transform.position.y;
+            other.GetComponent<PlayerControler>().playerRoomDistance = new Vector2(roomPosX, roomPosY);
+        
         }
         if (other.CompareTag("Enemy")){
-            other.GetComponent<MonsterAI>().monsterRoomDistance = stepToStart;
+            other.GetComponent<MonsterAI>().monsterRoomDistance = new Vector2(roomPosX, roomPosY);
 
-            other.GetComponent<MonsterAI>().monsterRoomX = transform.position.x;
-            other.GetComponent<MonsterAI>().monsterRoomY = transform.position.y;
         }
     }
 }

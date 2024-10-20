@@ -9,11 +9,13 @@ public class MonsterAI : MonoBehaviour
     public GameObject player;
     public GameObject roomGenerator;
     public List<RoomDoor> rooms;
-    public int monsterRoomDistance;
-    public float monsterRoomX;
-    public float monsterRoomY;
+    public Vector2 monsterRoomDistance;
+    public Pathfinding.AIDestinationSetter target;
 
-    public int movingStrategy = 0;// 0=sleep, 1=scout, 2=chase
+    private RoomDoor targetRoom;
+
+    public int movingStrategy = 1;// 0=sleep, 1=scout, 2=chase
+    
 
     void Start()
     {
@@ -22,30 +24,38 @@ public class MonsterAI : MonoBehaviour
         roomGenerator = GameObject.Find("RoomGenerator");
         rooms = roomGenerator.GetComponent<RoomGenerator>().rooms;
         player = GameObject.Find("Player");
+        target = GetComponent<Pathfinding.AIDestinationSetter>();
+        targetRoom = rooms[Random.Range(0, roomGenerator.GetComponent<RoomGenerator>().roomNumber)];
+
+
     }
 
-    
+
     void Update()
     {
         Move();
+        ChangeMode();
     }
 
     void ChangeMode()
     {
-        if(movingStrategy == 0)
+        float xx = Mathf.Abs(monsterRoomDistance.x - player.GetComponent<PlayerControler>().playerRoomDistance.x);
+        float yy = Mathf.Abs(monsterRoomDistance.y - player.GetComponent<PlayerControler>().playerRoomDistance.y);
+
+        if (movingStrategy == 0)
         {
 
         }
         else if (movingStrategy == 1)
         {
-            if(Mathf.Abs(monsterRoomDistance - player.GetComponent<PlayerControler>().playerRoomDistance) <= 1)
+            if(xx + yy <= 1)
             {
                 movingStrategy = 2;
             }
         }
         else if (movingStrategy == 2)
         {
-            if(Mathf.Abs(monsterRoomDistance - player.GetComponent<PlayerControler>().playerRoomDistance) >=2)
+            if(xx + yy >= 2)
             {
                 movingStrategy = 1;
             }
@@ -56,12 +66,16 @@ public class MonsterAI : MonoBehaviour
     {
         if(movingStrategy == 1)
         {
-            RoomDoor targetRoom;
-            targetRoom = rooms[Random.Range(0, roomGenerator.GetComponent<RoomGenerator>().roomNumber)];
+           target.target = targetRoom.transform;
+            if(transform.position == targetRoom.transform.position)
+            {
+                targetRoom = rooms[Random.Range(0, roomGenerator.GetComponent<RoomGenerator>().roomNumber)];
+
+            }
         }
         else if(movingStrategy == 2)
         {
-
+            target.target = player.transform;
         }
     }
 }

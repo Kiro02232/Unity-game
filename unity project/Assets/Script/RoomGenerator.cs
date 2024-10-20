@@ -56,6 +56,10 @@ public class RoomGenerator : MonoBehaviour
             Debug.Log(room.doorNum);
             AddDoor(room, room.transform.position);
         }
+
+        GetComponent<AstarPath>().Scan();
+        GameObject.Find("Monster").GetComponent<MonsterAI>().monsterRoomDistance.x = endRoom.roomPosX;
+        GameObject.Find("Monster").GetComponent<MonsterAI>().monsterRoomDistance.y = endRoom.roomPosY;
     }
 
 
@@ -158,6 +162,7 @@ public class RoomGenerator : MonoBehaviour
         }
 
         Instantiate(monsterRoom, generatorPoint.position, Quaternion.identity);
+        
     }
 }
 

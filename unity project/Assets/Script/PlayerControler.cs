@@ -8,9 +8,8 @@ public class PlayerControler : MonoBehaviour
     Animator anim;
     Vector2 movement;
     public float moveSpeed;
-    public int playerRoomDistance;
-    public float playerRoomX;
-    public float playerRoomY;
+    public Vector2 playerRoomDistance = new Vector2 (0, 0);
+
     // Start is called before the first frame update
     void Start()
     {

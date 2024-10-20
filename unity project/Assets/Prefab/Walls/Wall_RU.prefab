@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5275253822754191134}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wall_RU
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 8616838631362632576}
   - component: {fileID: 4916070264620808723}
   - component: {fileID: 3104722030509971781}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1648,7 +1648,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -94366187
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -1963,7 +1963,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3545350854375558285}
   - component: {fileID: 7047158090709301304}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2008,7 +2008,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2346698501667935953}
   - component: {fileID: 1277063768623023228}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Map_Rooms_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
