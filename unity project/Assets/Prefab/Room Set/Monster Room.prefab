@@ -118,7 +118,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &9166817514351570454
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -180,9 +180,8 @@ MonoBehaviour:
   player: {fileID: 0}
   roomGenerator: {fileID: 0}
   rooms: []
-  monsterRoomDistance: 0
-  monsterRoomX: 0
-  monsterRoomY: 0
+  monsterRoomDistance: {x: 0, y: 0}
+  target: {fileID: 0}
   movingStrategy: 0
 --- !u!114 &7821576833092701839
 MonoBehaviour:

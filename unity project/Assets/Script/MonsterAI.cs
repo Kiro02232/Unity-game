@@ -68,7 +68,7 @@ public class MonsterAI : MonoBehaviour
         if(movingStrategy == 1)
         {
             target.target = targetRoom.transform;
-            if(transform.position == targetRoom.transform.position)
+            if((transform.position - targetRoom.transform.position).sqrMagnitude < 1)
             {
                 targetRoom = rooms[Random.Range(0, roomGenerator.GetComponent<RoomGenerator>().roomNumber)];
                 
