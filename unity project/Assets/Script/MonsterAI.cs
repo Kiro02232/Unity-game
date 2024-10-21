@@ -26,7 +26,7 @@ public class MonsterAI : MonoBehaviour
         player = GameObject.Find("Player");
         target = GetComponent<Pathfinding.AIDestinationSetter>();
         targetRoom = rooms[Random.Range(0, roomGenerator.GetComponent<RoomGenerator>().roomNumber)];
-
+        movingStrategy = 1;
 
     }
 
@@ -41,7 +41,8 @@ public class MonsterAI : MonoBehaviour
     {
         float xx = Mathf.Abs(monsterRoomDistance.x - player.GetComponent<PlayerControler>().playerRoomDistance.x);
         float yy = Mathf.Abs(monsterRoomDistance.y - player.GetComponent<PlayerControler>().playerRoomDistance.y);
-
+        Debug.Log(xx);
+        Debug.Log(yy);
         if (movingStrategy == 0)
         {
 
@@ -66,11 +67,11 @@ public class MonsterAI : MonoBehaviour
     {
         if(movingStrategy == 1)
         {
-           target.target = targetRoom.transform;
+            target.target = targetRoom.transform;
             if(transform.position == targetRoom.transform.position)
             {
                 targetRoom = rooms[Random.Range(0, roomGenerator.GetComponent<RoomGenerator>().roomNumber)];
-
+                
             }
         }
         else if(movingStrategy == 2)

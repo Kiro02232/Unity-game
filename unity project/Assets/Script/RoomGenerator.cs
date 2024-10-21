@@ -53,7 +53,7 @@ public class RoomGenerator : MonoBehaviour
         foreach (var room in rooms) SetUpRoom(room, room.transform.position);
         foreach (var room in rooms)
         {
-            Debug.Log(room.doorNum);
+            //Debug.Log(room.doorNum);
             AddDoor(room, room.transform.position);
         }
 
