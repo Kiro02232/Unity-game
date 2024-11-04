@@ -9,11 +9,13 @@ public class PlayerControler : MonoBehaviour
     Vector2 movement;
     public float moveSpeed;
     public Vector2 playerRoomDistance = new Vector2 (0, 0);
+    public Collider2D coll;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        coll = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
     }
 

@@ -515,6 +515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   playerRoomDistance: {x: 0, y: 0}
+  coll: {fileID: 0}
 --- !u!50 &2105836917
 Rigidbody2D:
   serializedVersion: 4
