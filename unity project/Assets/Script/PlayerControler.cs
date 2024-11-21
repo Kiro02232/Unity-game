@@ -8,7 +8,7 @@ public class PlayerControler : MonoBehaviour
     Animator anim;
     Vector2 movement;
     public float moveSpeed;
-    public Vector2 playerRoomDistance = new Vector2 (0, 0);
+    public Vector2 playerRoomDistance = new Vector2 (0, 0);//distance to starting room counted by room
     public Collider2D coll;
 
     // Start is called before the first frame update

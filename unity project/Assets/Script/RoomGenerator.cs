@@ -17,8 +17,8 @@ public class RoomGenerator : MonoBehaviour
 
     [Header("位置控制")]
     public Transform generatorPoint;
-    public float xOffset;
-    public float yOffset;
+    public float xOffset;//horizontal distance between two rooms 
+    public float yOffset;//vertical distance between two rooms 
     public LayerMask roomLayer;
     public float detectRad;
 
@@ -38,6 +38,8 @@ public class RoomGenerator : MonoBehaviour
         rooms[0].GetComponent<SpriteRenderer>().color = startColor;
         preEndRoom = rooms[0];
         foreach (var room in rooms) SetUpRoom(room, room.transform.position);
+
+        //preEndRoom is furthest room from starting room
         foreach (var room in rooms)
         {
             Debug.Log(preEndRoom.stepToStart);
@@ -46,11 +48,12 @@ public class RoomGenerator : MonoBehaviour
                 preEndRoom = room;
             }
         }
+
         preEndRoom.GetComponent<SpriteRenderer>().color = preEndColor;
-        AddEndRoom();
+        AddEndRoom();//end room must be attached to preEndRoom
         rooms.Add(endRoom);
         endRoom.GetComponent<SpriteRenderer>().color = endColor;
-        foreach (var room in rooms) SetUpRoom(room, room.transform.position);
+        foreach (var room in rooms) SetUpRoom(room, room.transform.position);//set up room again to renew end room
         foreach (var room in rooms)
         {
             //Debug.Log(room.doorNum);
@@ -93,14 +96,16 @@ public class RoomGenerator : MonoBehaviour
     }
     public void SetUpRoom(RoomDoor newRoom, Vector3 roomPosition)
     {
+        //detect neighbor room
         newRoom.roomUp = Physics2D.OverlapCircle(roomPosition + new Vector3(0, yOffset, 0), 0.2f, roomLayer);
         newRoom.roomDown = Physics2D.OverlapCircle(roomPosition + new Vector3(0, -yOffset, 0), 0.2f, roomLayer);
         newRoom.roomRight = Physics2D.OverlapCircle(roomPosition + new Vector3(xOffset, 0, 0), 0.2f, roomLayer);
         newRoom.roomLeft = Physics2D.OverlapCircle(roomPosition + new Vector3(-xOffset, 0, 0), 0.2f, roomLayer);
+
         newRoom.UpdateRoom(xOffset, yOffset);
     }
 
-    public void AddDoor(RoomDoor Room, Vector3 roomPos)
+    public void AddDoor(RoomDoor Room, Vector3 roomPos)//generate wall
     {
         switch (Room.doorNum)
         {
@@ -161,7 +166,7 @@ public class RoomGenerator : MonoBehaviour
             SetUpRoom(endRoom, endRoom.transform.position);
         }
 
-        Instantiate(monsterRoom, generatorPoint.position, Quaternion.identity);
+        Instantiate(monsterRoom, generatorPoint.position, Quaternion.identity);//add monsterRoom's room set
         
     }
 }

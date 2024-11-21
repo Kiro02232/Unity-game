@@ -9,7 +9,7 @@ public class MonsterAI : MonoBehaviour
     public GameObject player;
     public GameObject roomGenerator;
     public List<RoomDoor> rooms;
-    public Vector2 monsterRoomDistance;
+    public Vector2 monsterRoomDistance;//distance to starting room counted by room
     public Pathfinding.AIDestinationSetter target;
 
     private RoomDoor targetRoom;
@@ -39,8 +39,8 @@ public class MonsterAI : MonoBehaviour
 
     void ChangeMode()
     {
-        float xx = Mathf.Abs(monsterRoomDistance.x - player.GetComponent<PlayerControler>().playerRoomDistance.x);
-        float yy = Mathf.Abs(monsterRoomDistance.y - player.GetComponent<PlayerControler>().playerRoomDistance.y);
+        float xx = Mathf.Abs(monsterRoomDistance.x - player.GetComponent<PlayerControler>().playerRoomDistance.x);//horizontal dis
+        float yy = Mathf.Abs(monsterRoomDistance.y - player.GetComponent<PlayerControler>().playerRoomDistance.y);//vertical dis
         Debug.Log(xx);
         Debug.Log(yy);
         if (movingStrategy == 0)
@@ -67,8 +67,8 @@ public class MonsterAI : MonoBehaviour
     {
         if(movingStrategy == 1)
         {
-            target.target = targetRoom.transform;
-            if((transform.position - targetRoom.transform.position).sqrMagnitude < 1)
+            target.target = targetRoom.transform;//target = a random room's position
+            if((transform.position - targetRoom.transform.position).sqrMagnitude < 1)//the position usually is not accurate enough, so set the inaccuracy to 1
             {
                 targetRoom = rooms[Random.Range(0, roomGenerator.GetComponent<RoomGenerator>().roomNumber)];
                 

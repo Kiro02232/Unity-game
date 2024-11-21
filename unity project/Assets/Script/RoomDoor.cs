@@ -8,10 +8,10 @@ public class RoomDoor : MonoBehaviour
 
     public GameObject doorLeft, doorRight, doorUp, doorDown;
     public bool roomLeft, roomRight, roomUp, roomDown;
-    public int stepToStart;
+    public int stepToStart;//distance to starting room counted by room
     public Text text;
     public int doorNum=0;
-    public int roomPosX, roomPosY;
+    public int roomPosX, roomPosY;//room position counted by room, starting room = (0, 0)
     // Start is called before the first frame update
     void Start()
     {
@@ -36,13 +36,13 @@ public class RoomDoor : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player"))//update player's room
         {
             CameraController.instance.ChangeTarget(transform);
             other.GetComponent<PlayerControler>().playerRoomDistance = new Vector2(roomPosX, roomPosY);
         
         }
-        if (other.CompareTag("Enemy")){
+        if (other.CompareTag("Enemy")){//update monster's room
             other.GetComponent<MonsterAI>().monsterRoomDistance = new Vector2(roomPosX, roomPosY);
 
         }
