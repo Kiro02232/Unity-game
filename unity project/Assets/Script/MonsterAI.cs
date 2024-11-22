@@ -79,4 +79,14 @@ public class MonsterAI : MonoBehaviour
             target.target = player.transform;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.CompareTag("trap"))
+        {
+            rb.velocity = Vector2.zero;
+
+        }
+
+    }
 }
