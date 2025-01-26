@@ -11,9 +11,9 @@ public class RoomGenerator : MonoBehaviour
 
     [Header("房間訊息")]
     public GameObject roomPrefab;
-    public int roomNumber;
-    public Color startColor, endColor, preEndColor;
-    private RoomDoor endRoom, preEndRoom;
+    public int roomNumber;//how many room
+    public Color startColor, endColor, preEndColor;//for debug
+    private RoomDoor endRoom, preEndRoom;//最終房間和最終房間的前一個房間
 
     [Header("位置控制")]
     public Transform generatorPoint;
@@ -49,10 +49,10 @@ public class RoomGenerator : MonoBehaviour
             }
         }
 
-        preEndRoom.GetComponent<SpriteRenderer>().color = preEndColor;
+        preEndRoom.GetComponent<SpriteRenderer>().color = preEndColor;//debug
         AddEndRoom();//end room must be attached to preEndRoom
-        rooms.Add(endRoom);
-        endRoom.GetComponent<SpriteRenderer>().color = endColor;
+        rooms.Add(endRoom);//add end room
+        endRoom.GetComponent<SpriteRenderer>().color = endColor;//debug
         foreach (var room in rooms) SetUpRoom(room, room.transform.position);//set up room again to renew end room
         foreach (var room in rooms)
         {
