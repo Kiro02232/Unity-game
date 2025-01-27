@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class PlayerControler : MonoBehaviour
 {
+    [Header("Basic")]
     Rigidbody2D rb;
     Animator anim;
     Vector2 movement;
     public float moveSpeed;
     public Vector2 playerRoomDistance = new Vector2 (0, 0);//distance to starting room counted by room
     public Collider2D coll;
+
+    [Header("BackpackSystem")]
+    string currentItem = "none";//現在持有物品
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +28,14 @@ public class PlayerControler : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+        if(currentItem != "none")
+        {
+            if (Input.GetButtonDown("Fire1"))
+            {
+                currentItem.Remove(0);
+                currentItem.Insert(0, "none");
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -31,8 +43,17 @@ public class PlayerControler : MonoBehaviour
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider other)
+    private void OnTriggerStay2D(Collider2D other)
     {
-        
+        if(currentItem == "none")
+        {
+            if(other.tag == "Radar")
+            {
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    currentItem.Replace("none", "Radar");
+                }
+            }
+        }
     }
 }
