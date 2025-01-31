@@ -14,6 +14,7 @@ public class PlayerControler : MonoBehaviour
 
     [Header("BackpackSystem")]
     string currentItem = "none";//現在持有物品
+    public GameObject Radar, SpeedUp, Trap;
 
     // Start is called before the first frame update
     void Start()
@@ -45,15 +46,36 @@ public class PlayerControler : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
-        if(currentItem == "none")
+     
+        if(other.gameObject.tag == "Radar")
         {
-            if(other.tag == "Radar")
+            GenerateItem(currentItem);
+            if (Input.GetButtonDown("Fire1"))
             {
-                if (Input.GetButtonDown("Fire1"))
-                {
-                    currentItem.Replace("none", "Radar");
-                }
+                currentItem.Replace(currentItem, "Radar");
             }
         }
+        
+    }
+
+    private void GenerateItem(string ItemName)//生成物品
+    {
+        if(ItemName == "none")
+        {
+            return;
+        }
+        if(ItemName == "Radar")
+        {
+            Instantiate(Radar);
+        }
+        if (ItemName == "SpeedUp")
+        {
+            Instantiate(SpeedUp);
+        }
+        if(ItemName == "Trap")
+        {
+            Instantiate(Trap);
+        }
+
     }
 }
