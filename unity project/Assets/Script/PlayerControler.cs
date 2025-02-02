@@ -53,6 +53,7 @@ public class PlayerControler : MonoBehaviour
             if (Input.GetButtonDown("Fire1"))
             {
                 currentItem.Replace(currentItem, "Radar");
+                other.gameObject.GetComponent<Collection>().Collect();
             }
         }
         
