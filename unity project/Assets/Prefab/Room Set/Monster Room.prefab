@@ -182,7 +182,9 @@ MonoBehaviour:
   rooms: []
   monsterRoomDistance: {x: 0, y: 0}
   target: {fileID: 0}
+  trapTime: 0.05
   movingStrategy: 0
+  timer: 0
 --- !u!114 &7821576833092701839
 MonoBehaviour:
   m_ObjectHideFlags: 0

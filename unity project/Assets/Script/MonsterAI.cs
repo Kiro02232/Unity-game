@@ -11,11 +11,13 @@ public class MonsterAI : MonoBehaviour
     public List<RoomDoor> rooms;
     public Vector2 monsterRoomDistance;//distance to starting room counted by room
     public Pathfinding.AIDestinationSetter target;
+    public float trapTime;
 
     private RoomDoor targetRoom;
 
     public int movingStrategy = 1;// 0=sleep, 1=scout, 2=chase
-    
+
+    public float timer;
 
     void Start()
     {
@@ -27,14 +29,19 @@ public class MonsterAI : MonoBehaviour
         target = GetComponent<Pathfinding.AIDestinationSetter>();
         targetRoom = rooms[Random.Range(0, roomGenerator.GetComponent<RoomGenerator>().roomNumber)];
         movingStrategy = 1;
-
+        timer = Time.time*Time.deltaTime;
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
         Move();
         ChangeMode();
+        if (Time.time * Time.deltaTime - timer >= trapTime)
+        {
+            GetComponent<Pathfinding.AIPath>().canMove = true;
+            Debug.Log("move");
+        }
     }
 
     void ChangeMode()
@@ -82,11 +89,16 @@ public class MonsterAI : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("trap"))
+        if(other.CompareTag("SetUpTrap"))
         {
-            rb.velocity = Vector2.zero;
+            
+            GetComponent<Pathfinding.AIPath>().canMove = false;
+            timer = Time.time*Time.deltaTime;
+            Destroy(other.gameObject);
 
         }
 
     }
+
+
 }

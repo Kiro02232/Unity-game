@@ -793,6 +793,11 @@ MonoBehaviour:
   moveSpeed: 5
   playerRoomDistance: {x: 0, y: 0}
   coll: {fileID: 0}
+  Radar: {fileID: 3369674803076976737, guid: cf7c895cbfeb3445db7476dcad819fa3, type: 3}
+  SpeedUp: {fileID: 9136267884292508882, guid: 47c5b028f9c1945008bbe66caae51421, type: 3}
+  Trap: {fileID: 4486532466831855852, guid: 7bbaa86c7025440508158e21cfc49a7d, type: 3}
+  RadarUI: {fileID: 367469725}
+  SetUpTrap: {fileID: 6571923091777917243, guid: d4f8705ff6da041f9a4868b2c4536d42, type: 3}
 --- !u!50 &2105836917
 Rigidbody2D:
   serializedVersion: 4
