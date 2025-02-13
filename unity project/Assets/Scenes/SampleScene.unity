@@ -676,9 +676,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2105836914}
   - component: {fileID: 2105836913}
+  - component: {fileID: 2105836916}
   - component: {fileID: 2105836918}
   - component: {fileID: 2105836917}
-  - component: {fileID: 2105836916}
   - component: {fileID: 2105836915}
   m_Layer: 0
   m_Name: Player
@@ -792,12 +792,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   playerRoomDistance: {x: 0, y: 0}
-  coll: {fileID: 0}
+  currentItem: none
   Radar: {fileID: 3369674803076976737, guid: cf7c895cbfeb3445db7476dcad819fa3, type: 3}
   SpeedUp: {fileID: 9136267884292508882, guid: 47c5b028f9c1945008bbe66caae51421, type: 3}
   Trap: {fileID: 4486532466831855852, guid: 7bbaa86c7025440508158e21cfc49a7d, type: 3}
   RadarUI: {fileID: 367469725}
   SetUpTrap: {fileID: 6571923091777917243, guid: d4f8705ff6da041f9a4868b2c4536d42, type: 3}
+  touchItem: {fileID: 0}
+  touchItemName: 
 --- !u!50 &2105836917
 Rigidbody2D:
   serializedVersion: 4
@@ -871,63 +873,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1001 &399803131483851194
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6438149569975047844, guid: b79f906af1f11479aa2395fb8fabb6e2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5.6885777
-      objectReference: {fileID: 0}
-    - target: {fileID: 6438149569975047844, guid: b79f906af1f11479aa2395fb8fabb6e2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.8241605
-      objectReference: {fileID: 0}
-    - target: {fileID: 6438149569975047844, guid: b79f906af1f11479aa2395fb8fabb6e2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.2277591
-      objectReference: {fileID: 0}
-    - target: {fileID: 6438149569975047844, guid: b79f906af1f11479aa2395fb8fabb6e2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6438149569975047844, guid: b79f906af1f11479aa2395fb8fabb6e2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6438149569975047844, guid: b79f906af1f11479aa2395fb8fabb6e2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6438149569975047844, guid: b79f906af1f11479aa2395fb8fabb6e2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6438149569975047844, guid: b79f906af1f11479aa2395fb8fabb6e2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6438149569975047844, guid: b79f906af1f11479aa2395fb8fabb6e2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6438149569975047844, guid: b79f906af1f11479aa2395fb8fabb6e2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9147611877132777742, guid: b79f906af1f11479aa2395fb8fabb6e2, type: 3}
-      propertyPath: m_Name
-      value: bomb
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b79f906af1f11479aa2395fb8fabb6e2, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -935,6 +880,5 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 1587800050}
   - {fileID: 2105836914}
-  - {fileID: 399803131483851194}
   - {fileID: 1910474944}
   - {fileID: 644989091}

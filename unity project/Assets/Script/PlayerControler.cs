@@ -13,10 +13,13 @@ public class PlayerControler : MonoBehaviour
     private Collider2D coll;
 
     [Header("BackpackSystem")]
-    string currentItem = "none";//現在持有物品
+    public string currentItem = "none";//現在持有物品
     public GameObject Radar, SpeedUp, Trap;//陷阱為未設置陷阱
     public GameObject RadarUI;
     public GameObject SetUpTrap;//已設置陷阱
+    public GameObject touchItem;
+    public string touchItemName;
+    private bool canBePick;
 
 
 
@@ -53,6 +56,15 @@ public class PlayerControler : MonoBehaviour
             RadarUI.SetActive(false);
         }
 
+        if (Input.GetButtonDown("Fire1") && canBePick)
+        {
+            currentItem.Replace(currentItem, touchItemName);
+            touchItem.gameObject.GetComponent<Collection>().Collect();
+            Debug.Log(currentItem);
+            GenerateItem(currentItem);
+
+            Destroy(touchItem.gameObject);
+        }
     }
 
     private void FixedUpdate()
@@ -60,27 +72,23 @@ public class PlayerControler : MonoBehaviour
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
      
         if(other.gameObject.tag == "Radar")//可能會跟37行出bug
         {
-            GenerateItem(currentItem);
-            if (Input.GetButtonDown("Fire1"))
-            {
-                currentItem.Replace(currentItem, "Radar");
-                other.gameObject.GetComponent<Collection>().Collect();
-            }
+            canBePick = true;
+            touchItem = other.gameObject;
+            touchItemName.Replace(touchItemName, "Radar");
+            
         }
 
         if (other.gameObject.tag == "Trap")//可能會跟37行出bug
         {
-            GenerateItem(currentItem);
-            if (Input.GetButtonDown("Fire1"))
-            {
-                currentItem.Replace(currentItem, "Trap");
-                other.gameObject.GetComponent<Collection>().Collect();
-            }
+            touchItemName.Replace(touchItemName, "Trap");
+            touchItem = other.gameObject;
+            canBePick = true;
+
             if (Input.GetButtonDown("Fire2"))
             {
                 //播放設置動畫
@@ -88,6 +96,21 @@ public class PlayerControler : MonoBehaviour
                 Destroy(other.gameObject);
                 GenerateItem("SetUpTrap");
             }
+        }
+
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+
+        if (other.gameObject.tag == "Radar")
+        {
+            canBePick = false;
+        }
+
+        if (other.gameObject.tag == "Trap")
+        {
+            canBePick = false;
         }
 
     }
