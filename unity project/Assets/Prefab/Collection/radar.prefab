@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5470251320479942860}
   - component: {fileID: 7820545076507103870}
   - component: {fileID: 5487103352155692223}
+  - component: {fileID: -4698776970203773916}
   m_Layer: 0
   m_Name: radar
   m_TagString: Radar
@@ -133,3 +134,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-4698776970203773916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3369674803076976737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 718664c29d05c4565867837cd863d7bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabReference: {fileID: 3369674803076976737}

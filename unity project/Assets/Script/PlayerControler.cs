@@ -13,12 +13,11 @@ public class PlayerControler : MonoBehaviour
     private Collider2D coll;
 
     [Header("BackpackSystem")]
-    public string currentItem = "none";//現在持有物品
+    public GameObject currentItem;//現在持有物品
     public GameObject Radar, SpeedUp, Trap;//陷阱為未設置陷阱
     public GameObject RadarUI;
     public GameObject SetUpTrap;//已設置陷阱
     public GameObject touchItem;
-    public string touchItemName;
     private bool canBePick;
 
 
@@ -37,17 +36,15 @@ public class PlayerControler : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
-        if(currentItem != "none")
+        if(currentItem != null)
         {
             if (Input.GetButtonDown("Fire1"))
             {
-                GenerateItem(currentItem);
-                currentItem.Remove(0);
-                currentItem.Insert(0, "none");
+                Instantiate(currentItem);
             }
         }
 
-        if (currentItem == "Radar")
+        if (currentItem.gameObject.tag == "Radar")
         {
             RadarUI.SetActive(true);
         }
@@ -58,12 +55,18 @@ public class PlayerControler : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1") && canBePick)
         {
-            currentItem.Replace(currentItem, touchItemName);
+            if (currentItem != null)
+            {
+                Instantiate(currentItem);
+            }
+
+            // 先複製物品，再刪除原始物品
+            currentItem = Instantiate(touchItem);
+            currentItem.SetActive(false); // 不讓它直接出現在場景中
+
             touchItem.gameObject.GetComponent<Collection>().Collect();
             Debug.Log(currentItem);
-            GenerateItem(currentItem);
 
-            Destroy(touchItem.gameObject);
         }
     }
 
@@ -74,28 +77,17 @@ public class PlayerControler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-     
-        if(other.gameObject.tag == "Radar")//可能會跟37行出bug
+
+        if (other.CompareTag("Radar") || other.CompareTag("SpeedUp") || other.CompareTag("Trap"))
         {
             canBePick = true;
             touchItem = other.gameObject;
-            touchItemName.Replace(touchItemName, "Radar");
-            
         }
 
-        if (other.gameObject.tag == "Trap")//可能會跟37行出bug
+        if (other.gameObject.tag == "Trap")
         {
-            touchItemName.Replace(touchItemName, "Trap");
-            touchItem = other.gameObject;
-            canBePick = true;
+           //設置陷阱
 
-            if (Input.GetButtonDown("Fire2"))
-            {
-                //播放設置動畫
-
-                Destroy(other.gameObject);
-                GenerateItem("SetUpTrap");
-            }
         }
 
     }
@@ -115,27 +107,5 @@ public class PlayerControler : MonoBehaviour
 
     }
 
-    private void GenerateItem(string ItemName)//生成物品
-    {
-        if(ItemName == "none")
-        {
-            return;
-        }
-        if(ItemName == "Radar")
-        {
-            Instantiate(Radar);
-        }
-        if (ItemName == "SpeedUp")
-        {
-            Instantiate(SpeedUp);
-        }
-        if(ItemName == "Trap")
-        {
-            Instantiate(Trap);
-        }
-        if(ItemName == "SetUpTrap")
-        {
-            Instantiate(SetUpTrap);
-        }
-    }
+
 }
